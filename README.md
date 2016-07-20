@@ -9,13 +9,13 @@ java -jar cb-view-transfer.jar -buckets <comma-separated-args> -source <arg> -ta
 ```
 **-buckets**: Couchbase buckets that contains views that you want to transfer to target node from source node.
 
-**-source**: Couchbase source node that contains views that you want to transfer.
+**-source**: Couchbase source node that contains views that you want to transfer. There is no need to add `/pools` path to end of node address.
 
-**-target**: Couchbase target node that you want to transfer views to.
+**-target**: Couchbase target node that you want to transfer views to. There is no need to add `/pools` path to end of node address.
 
-**-username**: target node web admin username.
+**-username**: Target node web admin username.
 
-**-password**: target node web admin password.
+**-password**: Target node web admin password.
 
 example usage:
 ```
