@@ -34,14 +34,14 @@ public class ViewNodeLoader implements Loader {
                     }
                     String designDocName = id.substring(id.lastIndexOf('/') + 1);
 
-                    List<MapReduceView> mapReduceViews = new ArrayList<MapReduceView>();
+                    List<MapReduceView> mapReduceViews = new ArrayList<>();
                     for (Map.Entry<String, ViewDetail> entry : row.getDoc().getJson().getViews().getProps().entrySet()) {
                         String viewName = entry.getKey();
                         ViewDetail viewDetail = entry.getValue();
                         mapReduceViews.add(MapReduceView.create(viewName, viewDetail.getMap(), viewDetail.getReduce()));
                     }
 
-                    List<SpatialView> spatialViews = new ArrayList<SpatialView>();
+                    List<SpatialView> spatialViews = new ArrayList<>();
                     for (Map.Entry<String, String> entry : row.getDoc().getJson().getSpatial().getProps().entrySet()) {
                         String viewName = entry.getKey();
                         String mapFunction = entry.getValue();
