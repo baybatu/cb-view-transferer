@@ -21,7 +21,7 @@ There is no need to add `/pools` path to end of node address.
 There is no need to add `/pools` path to end of node address.
 
 **-buckets**: Optional. Couchbase buckets that contains views that you want to transfer to target from source.
-If you intend to transfer all views, then no need to specify *buckets* parameter.
+If you intend to transfer all views, then no need to specify `buckets` parameter.
 
 **-username**: Web admin username. Required if `source` parameter points to Couchbase node instead of XML file.
 
