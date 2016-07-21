@@ -1,41 +1,29 @@
 package com.batuhanbayrakci.cbviewtransferer;
 
 import com.batuhanbayrakci.cbviewtransferer.model.*;
-import com.couchbase.client.CouchbaseClient;
-import com.couchbase.client.CouchbaseConnectionFactoryBuilder;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
 import java.net.URI;
-import java.util.*;
-import java.util.concurrent.TimeUnit;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
-public class CouchbaseViewLoader {
+public class ViewNodeLoader implements Loader {
 
-    public Buckets loadFrom(URI sourceURI, List<String> bucketNames, String username, String password) {
+    public Buckets load(ViewLoaderParameters viewLoaderParameters) {
         Buckets cbBuckets = new Buckets();
-        for (String bucket : bucketNames) {
-            CouchbaseClient couchbaseClient;
-            try {
-                System.out.println("Couchbase client is being created for '" + bucket + "' bucket.");
-                couchbaseClient = new CouchbaseClient(
-                        new CouchbaseConnectionFactoryBuilder()
-                                .buildCouchbaseConnection(Collections.singletonList(sourceURI), bucket, ""));
-            } catch (Exception e) {
-                System.out.println("Connection error occurred while connecting to bucket '" + bucket + "'. " +
-                        "Skipping this bucket...");
-                continue;
-            }
-
-            System.out.println("Couchbase client has been initialized for bucket '" + bucket + "'");
-
+        for (String bucket : getBucketNames(viewLoaderParameters.getBucketNames(), viewLoaderParameters.getSourceURI())) {
             try {
                 HttpResponse<JsonNode> response = Unirest
-                        .get(sourceURI.toString() + "/default/buckets/" + bucket + "/ddocs")
-                        .basicAuth(username, password)
+                        .get(viewLoaderParameters.getSourceURI().toString() + "/default/buckets/" + bucket + "/ddocs")
+                        .basicAuth(viewLoaderParameters.getUsername(), viewLoaderParameters.getPassword())
                         .asJson();
                 Rows rows = new JsonSerializer().fromJson(response.getBody().toString(), Rows.class);
                 Bucket cbBucket = new Bucket(bucket);
@@ -67,16 +55,44 @@ public class CouchbaseViewLoader {
             } catch (UnirestException e) {
                 throw new RuntimeException(e);
             }
-
-            System.out.println("Couchbase client is being shut down for '" + bucket + "' bucket.");
-            couchbaseClient.shutdown(10, TimeUnit.SECONDS);
         }
         return cbBuckets;
+    }
+
+    private List<String> getBucketNames(List<String> buckets, URI sourceURI) {
+        if (!buckets.isEmpty()) {
+            return buckets;
+        }
+        System.out.println("Fetching all bucket info from node:'" + sourceURI.toString() + "'");
+        try {
+            HttpResponse<JsonNode> response = Unirest
+                    .get(sourceURI.toString() + "/default/buckets")
+                    .asJson();
+            List<BucketName> allBucketNames = new JsonSerializer()
+                    .fromJsonFromTypedReference(
+                            response.getBody().toString(),
+                            new TypeReference<List<BucketName>>() {});
+            return allBucketNames.stream().map(BucketName::getName).collect(Collectors.toList());
+        } catch (UnirestException e) {
+            throw new RuntimeException(e);
+        }
+    }
+}
+
+class BucketName {
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
 
 class Rows {
-    private List<Row> rows = new ArrayList<Row>();
+    private List<Row> rows = new ArrayList<>();
 
     public List<Row> getRows() {
         return rows;

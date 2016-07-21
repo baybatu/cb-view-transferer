@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<buckets>
+    <bucket name="Products">
+        <design-doc name="infoDesignDoc">
+            <view name="bySaleDate">
+                <map-function>
+                    <![CDATA[
+                        function (doc, meta) {
+                          if(doc.saleDate){
+                            emit(doc.saleDate, null);
+                          }
+                        }
+                    ]]>
+                </map-function>
+                <reduce value="_count"/>
+            </view>
+
+            <view name="byTitle">
+                <map-function>
+                    <![CDATA[
+                        function (doc, meta) {
+                          if(doc.title){
+                            emit(doc.title, null);
+                          }
+                        }
+                    ]]>
+                </map-function>
+                <reduce value="_count"/>
+            </view>
+        </design-doc>
+
+        <design-doc name="storeDesignDoc">
+            <view name="byStoreName">
+                <map-function>
+                    <![CDATA[
+                        function (doc, meta) {
+                          if (doc.byStoreName) {
+                              emit(doc.byStoreName, null);
+                          }
+                        }
+                    ]]>
+                </map-function>
+            </view>
+        </design-doc>
+
+        <design-doc name="geoSpatialDesignDoc">
+            <spatial-view name="byLatitude">
+                <map-function>
+                    <![CDATA[
+                        function (doc) {
+                            if (doc.geometry) {
+                                emit([doc.geometry], null);
+                            }
+                        }
+                    ]]>
+                </map-function>
+            </spatial-view>
+        </design-doc>
+    </bucket>
+
+    <bucket name="Categories">
+        <design-doc name="categoryDesignDoc">
+            <view name="byName">
+                <map-function>
+                    <![CDATA[
+                        function (doc, meta) {
+                          if (doc.name) {
+                            emit(doc.name, null);
+                          }
+                        }
+                    ]]>
+                </map-function>
+                <reduce value="_count"/>
+            </view>
+
+            <view name="byLevel">
+                <map-function>
+                    <![CDATA[
+                        function (doc, meta) {
+                          if(doc.level){
+                            emit(doc.level, null);
+                          }
+                        }
+                    ]]>
+                </map-function>
+            </view>
+        </design-doc>
+    </bucket>
+
+    <bucket name="Customers"/>
+
+</buckets>

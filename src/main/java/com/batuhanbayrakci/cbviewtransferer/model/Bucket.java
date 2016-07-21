@@ -1,13 +1,20 @@
 package com.batuhanbayrakci.cbviewtransferer.model;
 
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Bucket {
 
+    @XmlAttribute(name = "name", required = true)
     private String name;
 
-    private List<DesignDoc> designDocs = new ArrayList<DesignDoc>();
+    @XmlElement(name = "design-doc", required = true)
+    private List<DesignDoc> designDocs = new ArrayList<>();
+
+    public Bucket() {
+    }
 
     public Bucket(String name) {
         this.name = name;
@@ -32,4 +39,5 @@ public class Bucket {
     public void addDesignDoc(DesignDoc designDoc) {
         designDocs.add(designDoc);
     }
+
 }

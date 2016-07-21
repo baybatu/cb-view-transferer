@@ -13,7 +13,7 @@ public class DesignDocTest {
     @Test
     public void shouldDesignDocumentsBeValidIfItHasSpatialViewButMapReduceView() {
         DesignDoc designDoc = new DesignDoc();
-        designDoc.setMapReduceViews(new ArrayList<MapReduceView>());
+        designDoc.setMapReduceViews(new ArrayList<>());
         designDoc.setSpatialViews(Collections.singletonList(new SpatialView()));
 
         assertTrue(designDoc.isValid());
@@ -23,7 +23,7 @@ public class DesignDocTest {
     public void shouldDesignDocumentsBeValidIfItHasMapReduceViewButSpatialView() {
         DesignDoc designDoc = new DesignDoc();
         designDoc.setMapReduceViews(Collections.singletonList(new MapReduceView()));
-        designDoc.setSpatialViews(new ArrayList<SpatialView>());
+        designDoc.setSpatialViews(new ArrayList<>());
 
         assertTrue(designDoc.isValid());
     }
@@ -31,8 +31,8 @@ public class DesignDocTest {
     @Test
     public void shouldDesignDocumentsNotBeValidIfItHasNeitherMapReduceViewNorSpatialView() {
         DesignDoc designDoc = new DesignDoc();
-        designDoc.setMapReduceViews(new ArrayList<MapReduceView>());
-        designDoc.setSpatialViews(new ArrayList<SpatialView>());
+        designDoc.setMapReduceViews(new ArrayList<>());
+        designDoc.setSpatialViews(new ArrayList<>());
 
         assertFalse(designDoc.isValid());
     }

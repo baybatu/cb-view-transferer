@@ -12,9 +12,9 @@ import java.net.URI;
 import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 
-public class CouchbaseViewRestorer {
+public class ViewNodeCreator implements ViewCreator {
 
-    public void restore(Buckets buckets, URI nodeURI) throws IOException {
+    public void create(Buckets buckets, URI targetURI) throws IOException {
         for (Bucket bucket : buckets.getBuckets()) {
             if (bucket.getDesignDocs().isEmpty()) {
                 System.out.println("There is no design doc definition for '" + bucket.getName() + "' bucket. Skipping...");
@@ -26,7 +26,7 @@ public class CouchbaseViewRestorer {
                 System.out.println("Couchbase client is being created for '" + bucket.getName() + "' bucket.");
                 couchbaseClient = new CouchbaseClient(
                         new CouchbaseConnectionFactoryBuilder()
-                                .buildCouchbaseConnection(Collections.singletonList(nodeURI), bucket.getName(), ""));
+                                .buildCouchbaseConnection(Collections.singletonList(targetURI), bucket.getName(), ""));
             } catch (Exception e) {
                 System.out.println("Connection error occurred while connecting to bucket '" + bucket.getName() + "'. " +
                         "Skipping this bucket...");

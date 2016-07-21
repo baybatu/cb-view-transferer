@@ -3,6 +3,7 @@ package com.batuhanbayrakci.cbviewtransferer;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -27,6 +28,14 @@ public class JsonSerializer {
         try {
             return objectMapper.readValue(jsonString, clazz);
 
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public <T> T fromJsonFromTypedReference(String jsonString, TypeReference<T> type) {
+        try {
+            return objectMapper.readValue(jsonString, type);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

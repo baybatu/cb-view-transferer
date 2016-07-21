@@ -3,8 +3,6 @@ package com.batuhanbayrakci.cbviewtransferer;
 import com.batuhanbayrakci.cbviewtransferer.model.Buckets;
 import org.apache.commons.cli.ParseException;
 
-import java.io.IOException;
-
 public class Main {
 
     public static void main(String[] args) throws Exception {
@@ -12,20 +10,18 @@ public class Main {
         if (runOptions == null) {
             return;
         }
-        Buckets buckets = new CouchbaseViewLoader().loadFrom(runOptions.getSourceURI(),
-                runOptions.getBucketNames(),
-                runOptions.getUsername(),
-                runOptions.getPassword());
-        restoreViews(runOptions, buckets);
-    }
 
-    private static void restoreViews(RunOptions runOptions, Buckets buckets) throws IOException {
-        new CouchbaseViewRestorer().restore(buckets, runOptions.getTargetURI());
+        Buckets buckets = runOptions.getLoader().load(new ViewLoaderParameters(runOptions));
+        if (buckets.hasBucket()) {
+            runOptions.getViewCreator().create(buckets, runOptions.getTargetURI());
+        } else {
+            System.out.println("There is no bucket to transfer.");
+        }
     }
 
     private static RunOptions parseRunOptions(String[] args) throws Exception {
         try {
-            return new RunOptions(args);
+            return RunOptions.createFrom(args);
         } catch (ParseException e) {
             System.err.println(e.getMessage());
             return null;

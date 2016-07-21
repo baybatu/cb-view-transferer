@@ -2,12 +2,23 @@ package com.batuhanbayrakci.cbviewtransferer.model;
 
 import com.batuhanbayrakci.cbviewtransferer.jsbeautify.JsBeautify;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+@XmlAccessorType(XmlAccessType.FIELD)
 public class MapReduceView {
 
+    @XmlAttribute(name = "name", required = true)
     private String name;
 
+    @XmlElement(name = "map-function", required = true)
+    @XmlJavaTypeAdapter(CDataAdapter.class)
     private String mapFunction;
 
+    @XmlElement(name = "reduce")
     private Reduce reduce = new Reduce();
 
     public static MapReduceView create(String name, String mapFunction, String reduce) {
@@ -48,8 +59,10 @@ public class MapReduceView {
         return getReduce().getValue();
     }
 
+    @XmlAccessorType(XmlAccessType.FIELD)
     public static class Reduce {
 
+        @XmlAttribute(name = "value")
         private String value = "";
 
         public String getValue() {

@@ -1,15 +1,20 @@
 package com.batuhanbayrakci.cbviewtransferer.model;
 
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DesignDoc {
 
+    @XmlAttribute(name = "name", required = true)
     private String name;
 
-    private List<MapReduceView> mapReduceViews = new ArrayList<MapReduceView>();
+    @XmlElement(name = "view")
+    private List<MapReduceView> mapReduceViews = new ArrayList<>();
 
-    private List<SpatialView> spatialViews = new ArrayList<SpatialView>();
+    @XmlElement(name = "spatial-view")
+    private List<SpatialView> spatialViews = new ArrayList<>();
 
     public static DesignDoc create(String name, List<MapReduceView> mapReduceViews, List<SpatialView> spatialViews) {
         DesignDoc designDoc = new DesignDoc();
