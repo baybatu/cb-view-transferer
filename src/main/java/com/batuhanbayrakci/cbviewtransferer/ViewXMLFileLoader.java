@@ -1,7 +1,9 @@
 package com.batuhanbayrakci.cbviewtransferer;
 
 import com.batuhanbayrakci.cbviewtransferer.jsbeautify.JsBeautify;
-import com.batuhanbayrakci.cbviewtransferer.model.*;
+import com.batuhanbayrakci.cbviewtransferer.model.Buckets;
+import com.batuhanbayrakci.cbviewtransferer.model.MapReduceView;
+import com.batuhanbayrakci.cbviewtransferer.model.SpatialView;
 import org.apache.commons.io.IOUtils;
 
 import javax.xml.bind.JAXBContext;

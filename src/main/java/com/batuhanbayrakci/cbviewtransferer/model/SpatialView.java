@@ -1,7 +1,6 @@
 package com.batuhanbayrakci.cbviewtransferer.model;
 
 import com.batuhanbayrakci.cbviewtransferer.jsbeautify.JsBeautify;
-import com.sun.xml.internal.txw2.annotation.XmlCDATA;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
