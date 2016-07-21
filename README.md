@@ -10,7 +10,11 @@ Lets you to:
 * document your Couchbase buckets and views with their *map-reduce* (*map* for spatial views) functions in XML file.
 * store the XML file in your version control system such as git. 
 * restore views with corresponding *map-reduce* (*map* for spatial views) functions to your Couchbase cluster that you want to have those views.
-* transfer your views between Couchbase environments(dev,test,QA) easily.
+* transfer your views between Couchbase environments(dev, test, QA) easily.
+
+Download
+--------
+You can download latest version of the tool from [here](https://github.com/baybatu/cb-view-transferer/releases/latest)
 
 Usage
 -----
