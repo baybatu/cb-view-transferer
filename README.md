@@ -14,7 +14,7 @@ Lets you to:
 
 Download
 --------
-You can download latest version of the tool from [here](https://github.com/baybatu/cb-view-transferer/releases/latest)
+You can download latest version of the jar from [here](https://github.com/baybatu/cb-view-transferer/releases/latest)
 
 Usage
 -----
@@ -27,7 +27,7 @@ There is no need to add `/pools` path to end of node address.
 **-target**: Couchbase node or XML file that you want to transfer views to. 
 There is no need to add `/pools` path to end of node address.
 
-**-buckets**: Optional. Couchbase buckets that contains views that you want to transfer to target from source.
+**-buckets**: Optional. Couchbase buckets that contain views that you want to transfer to target from source.
 If you intend to transfer all views, then no need to specify `buckets` parameter.
 
 **-username**: Web admin username. Required if `source` parameter points to Couchbase node instead of XML file.
