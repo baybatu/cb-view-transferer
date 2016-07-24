@@ -17,11 +17,7 @@ public class ViewLoaderParameters {
         this(runOptions.getSourceURI(), runOptions.getBucketNames(), runOptions.getUsername(), runOptions.getPassword());
     }
 
-    public ViewLoaderParameters(URI sourceURI, List<String> bucketNames) {
-        this(sourceURI, bucketNames, "", "");
-    }
-
-    public ViewLoaderParameters(URI sourceURI, List<String> bucketNames, String username, String password) {
+    private ViewLoaderParameters(URI sourceURI, List<String> bucketNames, String username, String password) {
         this.sourceURI = sourceURI;
         this.bucketNames = bucketNames;
         this.username = username;

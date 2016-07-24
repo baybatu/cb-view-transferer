@@ -63,7 +63,7 @@ public class RunOptions {
         if (sourceURI.equals(targetURI)) {
             throw new RuntimeException("Source and target URIs cannot be same.");
         }
-        if (isNodeAddress(sourceURI) && (username == null || password == null)) {
+        if (isNodeAddress(sourceURI) && (StringUtils.isAnyBlank(username, password))) {
             throw new RuntimeException("Couchbase admin panel username and password is mandatory.");
         }
     }
