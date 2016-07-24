@@ -5,7 +5,7 @@ Couchbase View Transferer - cb-view-transfer
 XML file contains *map-reduce* functions and description of each view. You can examine sample view xml file [sample_cb_views.xml](https://github.com/baybatu/cb-view-transferer/blob/master/src/main/resources/sample_cb_views.xml) 
 in `resources/` directory in source code.
 
-Lets you to:
+`cb-view-transfer` lets you to:
 
 * document your Couchbase buckets and views with their *map-reduce* (*map* for spatial views) functions in XML file.
 * store the XML file in your version control system such as git. 
