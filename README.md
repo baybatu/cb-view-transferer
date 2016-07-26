@@ -14,7 +14,7 @@ in `resources/` directory in source code.
 
 Download
 --------
-You can download latest version of the jar from [here](https://github.com/baybatu/cb-view-transferer/releases/latest)
+You can download latest version of the jar file from [here](https://github.com/baybatu/cb-view-transferer/releases/latest)
 
 Usage
 -----
