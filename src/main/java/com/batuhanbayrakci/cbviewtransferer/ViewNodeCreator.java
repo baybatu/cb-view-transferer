@@ -49,7 +49,7 @@ public class ViewNodeCreator implements ViewCreator {
         }
     }
 
-    private static boolean createDesignDoc(CouchbaseClient couchbaseClient, DesignDoc designDoc) {
+    private boolean createDesignDoc(CouchbaseClient couchbaseClient, DesignDoc designDoc) {
         DesignDocument newDesignDoc = new DesignDocument(designDoc.getName());
         for (MapReduceView mapReduceView : designDoc.getMapReduceViews()) {
             newDesignDoc.getViews().add(
