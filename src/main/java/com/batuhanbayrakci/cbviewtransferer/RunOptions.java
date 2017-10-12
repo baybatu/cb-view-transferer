@@ -8,6 +8,7 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 public class RunOptions {
 
@@ -39,7 +40,7 @@ public class RunOptions {
         this.viewCreator = getViewCreatorStrategy();
     }
 
-    public static RunOptions createFrom(String[] args) throws ParseException {
+    public static Optional<RunOptions> createFrom(String[] args) throws ParseException {
         org.apache.commons.cli.Options options = new org.apache.commons.cli.Options();
 
         options.addOption("buckets", true, "comma-separated bucket names that wanted to be transferred. " +
@@ -51,12 +52,12 @@ public class RunOptions {
 
         if (args.length == 0 || args[0].endsWith("help")) {
             printHelp(options);
-            return null;
+            return Optional.empty();
         }
 
         RunOptions runOptions = new RunOptions(options, args);
         runOptions.validateParameters();
-        return runOptions;
+        return Optional.of(runOptions);
     }
 
     private void validateParameters() {
