@@ -1,6 +1,8 @@
 Couchbase View Transferer - cb-view-transfer
 ============================================
+
 [![Build Status](https://travis-ci.org/baybatu/cb-view-transferer.svg?branch=master)](https://travis-ci.org/baybatu/cb-view-transferer)
+
 `cb-view-transfer` transfers your Couchbase __map-reduce__ and __spatial__ views from one node or XML file to target node or XML file. 
 
 XML file contains *map-reduce* functions and description of each view. You can examine sample xml file [sample_cb_views.xml](https://github.com/baybatu/cb-view-transferer/blob/master/src/main/resources/sample_cb_views.xml) 
